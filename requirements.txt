@@ -1,0 +1,8 @@
+openai==1.21.2
+httpx==0.26.0
+google-search-results==2.4.2
+ruamel.yaml==0.18.5
+serpapi==0.1.5
+termcolor==2.4.0
+tenacity==8.2.3
+pyinstaller

@@ -1,0 +1,70 @@
+#### 模式，只有两种模式，download 和 summary
+# -download 代表搜索和下载相关论文
+# -summary 代表了总结论文
+
+mode: summary
+
+### 搜索和下载论文相关字段
+# 使用Google scholar API，直击在 https://scholar.google.com/ 搜索下载是一样的
+# example:
+# - 我想了解一篇关于"transformer"的论文，帮我搜索并下载一篇这样的论文
+# - 我有一篇论文的url地址是"https://browse.arxiv.org/pdf/2310.02207.pdf"，帮我下载它
+# - 下载以下这些论文，它们的url是：“https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf”，“https://browse.arxiv.org/pdf/2310.02207.pdf”
+query: find a paper about english food
+
+# 论文下载后存放的目录，如不填写，则是默认值
+# example:
+# - ./ (代表当前目录，默认值)
+# - /Users/xxx/download/
+paper_dir: ./data/paper
+
+# 下载论文功能使用的模型
+# 这里使用3.5足够了
+download_model: gpt-3.5-turbo-1106
+
+
+### 总结论文相关字段
+# 每一个id代表了不同的事务。
+# 填写一个任意值，以后不再改变即可
+unique_id: paper_summary
+
+# 代理端口设置
+proxies:
+  http://: http://127.0.0.1:1081
+  https://: http://127.0.0.1:1081
+
+# 模型
+summary_model: gpt-4o
+
+# 自动写入，不需要手动填写
+assistant_id:
+
+# 和assistant的通信密钥
+openai_key:
+
+# 用于总结论文的提示词
+# 按需改变
+summary_prompt: ' 帮助我总结一篇或者多篇论文，你总结的内容需要严格遵守以下要求： 
+  1.格式层次分明，使用缩进和数字标号。如1的子内容使用1.1，1.2，1.3，1.1的子内容使用1.1.1，1.1.2。
+  2.严格按照论文的内容作出总结，不能有观点和内容上的偏差，如果出现了任何难以确定的内容，应该明确指出。 
+  3.专业词汇和关键词使用论文所使用的语言表述，其他使用中文进行表述。
+  4.如果是多篇论文，则把多篇论文分别总结出来，并且作出标识 '
+
+# 需要总结的论文的路径
+# 可以是多篇论文
+files:
+- ./examples/transformer.pdf
+
+# 可以是true/false
+# true: 代表继续追问
+# false: 代表全新的话题
+is_conversation: false
+
+# 发送给AI的消息，可以提一些小要求或者小提示
+message: 详细总结我提供的论文
+
+# 记录结果的文件
+result_file: ./examples/result.txt
+
+
+
